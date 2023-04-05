@@ -10,7 +10,7 @@ source test-venv/bin/activate
 pip3 install -r requirements.txt
 python3 create.py
 python3 -m data.insert_data
-python3 query_data.py
+python3 -m queries.run_queries
 ```
 
 Windows:
@@ -20,5 +20,5 @@ test-venv\Scripts\activate.bat
 pip3 install -r requirements.txt
 python3 create.py
 python3 -m data.insert_data
-python3 query_data.py
+python3 -m queries.run_queries
 ```
