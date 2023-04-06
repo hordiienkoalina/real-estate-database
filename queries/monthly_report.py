@@ -31,11 +31,21 @@ def get_top_offices(session, month, year, limit=3):
     return top_offices
 
 def get_monthly_sales_summary(session: Session, month: str, year: str):
-    monthly_sales = (
-        session.query(func.count(Sale.id).label("num_sales"), func.sum(Sale.sale_price).label("total_sales"))
+    result = (
+        session.query(
+            func.avg(Sale.date_of_sale - House.date_of_listing).label("avg_days_on_market"),
+            func.avg(Sale.sale_price).label("avg_selling_price"),
+        )
+        .select_from(Sale)
+        .join(House, House.id == Sale.house_id)
         .filter(func.extract("year", Sale.date_of_sale) == year)
         .filter(func.extract("month", Sale.date_of_sale) == month)
         .one()
     )
 
-    return monthly_sales
+    return {
+        "avg_days_on_market": result.avg_days_on_market,
+        "avg_selling_price": float(result.avg_selling_price),
+    }
+
+    #return monthly_sales

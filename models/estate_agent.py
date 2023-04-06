@@ -15,6 +15,7 @@ class EstateAgent(Base):
     name = Column(String, nullable=False)       # Agent name (non-nullable)
     email = Column(String, nullable=False)      # Agent email (non-nullable)
     phone = Column(String, nullable=False)      # Agent phone (non-nullable)
+    office_id = Column(Integer, nullable=False) # Agent office (non-nullable)
 
     # Define the relationships between the EstateAgent model and other models
     listings = relationship("House", back_populates="listing_agent")  # One-to-many relationship with the House model

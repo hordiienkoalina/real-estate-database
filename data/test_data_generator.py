@@ -3,11 +3,12 @@ from queries.utils import calculate_commission
 
 fake = Faker()
 
-def generate_estate_agent_data():
+def generate_estate_agent_data(office_id):
     return {
-        "name": fake.name(),
+        "name": f"{fake.first_name()} {fake.last_name()}",
         "email": fake.email(),
-        "phone": fake.phone_number()
+        "phone": fake.phone_number(),
+        "office_id": office_id
     }
 
 def generate_office_data():
