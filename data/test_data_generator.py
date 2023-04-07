@@ -18,7 +18,7 @@ def generate_office_data():
         "address": fake.address()
     }
 
-def generate_house_data(estate_agent_id, office_id):
+def generate_house_data(selling_agent_id, office_id):
     return {
         "seller_name": fake.name(),
         "bedrooms": fake.random_int(min=1, max=5),
@@ -26,34 +26,25 @@ def generate_house_data(estate_agent_id, office_id):
         "listing_price": fake.random_int(min=50000, max=500000),
         "zip_code": fake.zipcode(),
         "date_of_listing": fake.date_between(start_date='-1y', end_date='today'),
-        "listing_agent_id": estate_agent_id,
+        "listing_agent_id": selling_agent_id,
         "office_id": office_id,
         "sold": fake.boolean(chance_of_getting_true=50)
     }
 
-# def generate_sale_data(house_id, selling_agent_id):
-#     sale_price = fake.random_int(min=50000, max=500000)
-#     return {
-#         "buyer_name": fake.name(),
-#         "sale_price": sale_price,
-#         "date_of_sale": fake.date_between(start_date='-1y', end_date='today'),
-#         "house_id": house_id,
-#         "selling_agent_id": selling_agent_id
-#     }
-def generate_sale_data(house_id, estate_agent_id, session):
+def generate_sale_data(house_id, selling_agent_id, session):
+    
     # Fetch the date_of_listing for the given house_id
     date_of_listing = session.query(House.date_of_listing).filter(House.id == house_id).scalar()
-
     # Generate a random date_of_sale after the date_of_listing
     date_of_sale = fake.date_between(start_date=date_of_listing, end_date='today')
-
     sale_price = fake.random_int(min=50000, max=500000)
+    
     return {
         "buyer_name": fake.name(),
         "sale_price": sale_price,
         "date_of_sale": date_of_sale,
         "house_id": house_id,
-        "selling_agent_id": estate_agent_id
+        "selling_agent_id": selling_agent_id
     }
 
 def generate_commission_data(sale_id, sale_price):
