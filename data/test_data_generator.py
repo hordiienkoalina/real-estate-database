@@ -26,7 +26,8 @@ def generate_house_data(estate_agent_id, office_id):
         "zip_code": fake.zipcode(),
         "date_of_listing": fake.date_between(start_date='-1y', end_date='today'),
         "listing_agent_id": estate_agent_id,
-        "office_id": office_id
+        "office_id": office_id,
+        "sold": fake.boolean(chance_of_getting_true=50)
     }
 
 def generate_sale_data(house_id, selling_agent_id):

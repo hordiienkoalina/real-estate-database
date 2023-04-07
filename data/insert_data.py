@@ -12,7 +12,6 @@ engine = create_engine(DATABASE_URI)
 session = Session(bind=engine)
 
 # Insert Offices
-# Generate and insert 3 fake offices into the database
 for _ in range(3):
     office_data = generate_office_data()
     office = Office(**office_data)
@@ -34,7 +33,6 @@ for office_id in office_ids:
 session.commit()
 
 # Insert Houses
-# Query all estate agents and offices from the database
 estate_agents = session.query(EstateAgent).all()
 offices = session.query(Office).all()
 
@@ -48,23 +46,21 @@ for agent in estate_agents:
 session.commit()
 
 # Insert Sales and Commissions
-# Query all houses from the database
-houses = session.query(House).all()
+houses = session.query(House).filter(House.sold == True).all()
 selling_agents = estate_agents
 
 # Generate and insert fake sales and commissions for a random subset of houses and selling agents
 for house in houses:
-    if fake.boolean(chance_of_getting_true=50):  # 50% chance to generate a sale for a house
-        agent = fake.random_element(selling_agents)
-        sale_data = generate_sale_data(house.id, agent.id)
-        sale = Sale(**sale_data)
-        session.add(sale)
-        session.commit()  # Commit the Sale object to the session
+    agent = fake.random_element(selling_agents)
+    sale_data = generate_sale_data(house.id, agent.id)
+    sale = Sale(**sale_data)
+    session.add(sale)
+    session.commit()  # Commit the Sale object to the session
 
-        sale_price = sale.sale_price
-        commission_data = generate_commission_data(sale.id, sale_price)
-        commission = Commission(**commission_data)
-        session.add(commission)
+    sale_price = sale.sale_price
+    commission_data = generate_commission_data(sale.id, sale_price)
+    commission = Commission(**commission_data)
+    session.add(commission)
 
 session.commit()
 

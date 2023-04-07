@@ -47,5 +47,3 @@ def get_monthly_sales_summary(session: Session, month: str, year: str):
         "avg_days_on_market": result.avg_days_on_market,
         "avg_selling_price": float(result.avg_selling_price),
     }
-
-    #return monthly_sales

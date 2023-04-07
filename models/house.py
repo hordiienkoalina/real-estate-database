@@ -18,7 +18,7 @@ class House(Base):
     listing_price = Column(Float, nullable=False)      # Listing price (non-nullable)
     zip_code = Column(String, nullable=False)          # Zip code (non-nullable)
     date_of_listing = Column(Date, nullable=False)     # Date of listing (non-nullable)
-    sold = Column(Boolean, default=False)              # Sold status (default to False)
+    sold = Column(Boolean, default=False)              # Sold status
 
     # Foreign keys
     listing_agent_id = Column(Integer, ForeignKey("estate_agents.id"), nullable=False) # Listing agent ID (non-nullable)
