@@ -1,3 +1,4 @@
+# Import necessary modules
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from data.test_data_generator import generate_estate_agent_data, generate_house_data, generate_office_data, generate_sale_data, generate_commission_data
@@ -6,9 +7,11 @@ from faker import Faker
 
 fake = Faker()
 
+# Define the database connection string
 DATABASE_URI = "sqlite:///real_estate.db"
-
+# Create a connection to the database
 engine = create_engine(DATABASE_URI)
+# Create a session to interact with the database
 session = Session(bind=engine)
 
 # Insert Offices

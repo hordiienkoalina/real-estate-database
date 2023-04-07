@@ -1,3 +1,4 @@
+# Commission calculation as per instructions
 def calculate_commission(sale_price):
     if sale_price < 100000:
         commission_rate = 0.10

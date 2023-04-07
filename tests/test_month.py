@@ -1,3 +1,4 @@
+# Import neccessary modules
 import unittest
 from datetime import datetime
 from sqlalchemy.orm import sessionmaker
@@ -6,6 +7,7 @@ from models.base import Base
 from models import House, Sale
 from queries.monthly_report import get_monthly_sales_summary
 
+# Define the test database URL
 TEST_DATABASE_URL = "sqlite:///test_database.db"
 
 class TestMonthlyReport(unittest.TestCase):

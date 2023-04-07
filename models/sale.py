@@ -17,9 +17,9 @@ class Sale(Base):
     date_of_sale = Column(Date, nullable=False)                  # Date of sale (non-nullable)
 
     # Foreign keys
-    house_id = Column(Integer, ForeignKey("houses.id"), nullable=False)         # Foreign key referencing the House model
+    house_id = Column(Integer, ForeignKey("houses.id"), nullable=False)                # Foreign key referencing the House model
     selling_agent_id = Column(Integer, ForeignKey("estate_agents.id"), nullable=False) # Foreign key referencing the EstateAgent model
 
     # Relationships
-    house = relationship("House", back_populates="sale")         # One-to-one relationship with the House model
+    house = relationship("House", back_populates="sale")                # One-to-one relationship with the House model
     selling_agent = relationship("EstateAgent", back_populates="sales") # One-to-many relationship with the EstateAgent model

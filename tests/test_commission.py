@@ -1,3 +1,4 @@
+# Import neccessary modules
 import unittest
 from models.commission import Commission
 from data.test_data_generator import generate_commission_data
@@ -6,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from models.base import Base
 
-# Define your test database URL
+# Define the test database URL
 TEST_DATABASE_URL = "sqlite:///test_database.db"
 
 class TestCommissionCalculation(unittest.TestCase):
@@ -32,6 +33,7 @@ class TestCommissionCalculation(unittest.TestCase):
             (1500000, 0.04),
         ]
 
+        # Test commission calculation for each test case
         for sale_price, expected_rate in test_cases:
             with self.subTest(sale_price=sale_price, expected_rate=expected_rate):
                 expected_commission = sale_price * expected_rate
@@ -43,6 +45,7 @@ class TestCommissionCalculation(unittest.TestCase):
         sale_price = 250000
         expected_commission = calculate_commission(sale_price)
 
+        # Test commission data generation
         commission_data = generate_commission_data(sale_id, sale_price)
         self.assertEqual(commission_data["amount"], expected_commission)
         self.assertEqual(commission_data["sale_id"], sale_id)
