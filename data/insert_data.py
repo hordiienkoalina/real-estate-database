@@ -52,7 +52,7 @@ selling_agents = estate_agents
 # Generate and insert fake sales and commissions for a random subset of houses and selling agents
 for house in houses:
     agent = fake.random_element(selling_agents)
-    sale_data = generate_sale_data(house.id, agent.id)
+    sale_data = generate_sale_data(house.id, agent.id, session)  # Pass the session object here
     sale = Sale(**sale_data)
     session.add(sale)
     session.commit()  # Commit the Sale object to the session
