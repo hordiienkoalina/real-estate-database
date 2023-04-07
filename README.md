@@ -60,6 +60,18 @@ python3 -m unittest tests/test_commission.py
 python3 -m unittest tests/test_test_month.py
 ```
 
+##  ✨ Technicalities ✨
+
+### Data Normalisation
+1. The database schema follows the principles of normalization. For example, the estate agent, office, house, and sale information is separated into respective tables; primary keys identify their unique records and foreign keys establish relationships between tables.
+2. The use of separate tables for storing commission information ensures that commission calculations are not duplicated and are easy to maintain. 
+
+### Indices
+Indices have been added to the foreign keys to optimize search queries and improve the performance of join operations between tables. For instance, indices on the ```office_id``` and ```listing_agent_id``` in the House table, and on the ```selling_agent_id``` and ```house_id``` in the Sale table, help speed up the retrieval of related data.
+
+### Transactions
+In ```insert_data.py```, transactions are used to ensure that all data insertions are atomic, consistent, isolated, and durable (ACID). For example, after inserting sales data into the Sale table, a commit operation is performed before inserting the related commission data into the Commission table. This ensures that the insertion of sales and commission data occurs as a single, indivisible operation, maintaining data integrity.
+
 ## Limitations
 Apart from all the impressive and useful features this tool offers, it has one drawback: the month of interest is hardcoded into run_queries.py. A more user-friendly approach would be to request the month of interest from the user through the Terminal, rather than having it hardcoded.
 
